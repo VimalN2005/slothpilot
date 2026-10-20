@@ -6,6 +6,10 @@
 [![Open-Source AI](https://img.shields.io/badge/AI-Open--Weight%20Models-purple)](https://ai.google.dev/gemma)
 [![Hacktoberfest 2026](https://img.shields.io/badge/Hacktoberfest-Week%203%20DEV%20Challenge-orange)](https://dev.to/challenges/hacktoberfest-week3-2026-10-19)
 
+<p align="center">
+  <img src="assets/slothpilot_banner.jpg" alt="SlothPilot Banner" width="100%" />
+</p>
+
 > **"Channel your inner sloth. You sleep 8 hours, SlothPilot works overnight."**
 
 Built specifically for the **[Hacktoberfest 2026 Week 3 DEV Challenge](https://dev.to/challenges/hacktoberfest-week3-2026-10-19)** (Theme: *"Slow and Steady: Build something with open-source AI that rewards laziness"* — International Sloth Day, Oct 20).
