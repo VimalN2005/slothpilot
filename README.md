@@ -1,6 +1,7 @@
 # 🦥 SlothPilot: The Autonomous Overnight Briefing & Multi-Agent Command Center
 
 [![CI](https://github.com/VimalN2005/slothpilot/actions/workflows/ci.yml/badge.svg)](https://github.com/VimalN2005/slothpilot/actions)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://slothpilot-xaqtgwwbpv2tfvscjhxakr.streamlit.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Open-Source AI](https://img.shields.io/badge/AI-Open--Weight%20Models-purple)](https://ai.google.dev/gemma)
@@ -96,7 +97,13 @@ SlothPilot includes zero-dependency OpenTelemetry tracing (`app/core/telemetry.p
 
 ## ⚡ Quickstart & Usage
 
-### 1. Clone & Set Up
+### 🌐 Instant Live Cloud Demo
+Try the interactive Morning Command Center directly in your browser without any setup:
+👉 **[Launch SlothPilot Live Demo](https://slothpilot-xaqtgwwbpv2tfvscjhxakr.streamlit.app/)**
+
+---
+
+### 1. Clone & Set Up Locally
 ```bash
 git clone https://github.com/VimalN2005/slothpilot.git
 cd slothpilot
