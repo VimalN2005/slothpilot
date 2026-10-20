@@ -1,0 +1,1 @@
+"""SlothPilot application package."""
