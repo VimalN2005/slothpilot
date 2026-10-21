@@ -150,9 +150,56 @@ with tab1:
     if getattr(briefing, "first_meeting", None):
         st.success(f"🛌 **Sloth Sleep Buffer Active:** First meeting is **{briefing.first_meeting}**. You have **+{briefing.sleep_buffer_minutes} mins** of extra sleep buffer before prep!")
 
+    # 🎙️ 45-Second Sloth Morning Audio Briefing
+    speech_text = briefing.generate_audio_speech_text().replace('"', '\\"').replace("\n", " ")
+    audio_html = f"""
+    <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 12px 18px; border-radius: 10px; border: 1px solid #334155; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
+        <div>
+            <strong style="color: #4ade80; font-size: 14px;">🎙️ 45-Second Sloth Audio Briefing</strong><br>
+            <span style="color: #94a3b8; font-size: 12px;">Listen to your overnight summary while pouring your morning coffee.</span>
+        </div>
+        <button id="audio-btn" onclick="playBriefing()" style="background-color: #22c55e; color: #000; border: none; font-weight: bold; padding: 8px 16px; border-radius: 6px; cursor: pointer;">
+            ▶️ Listen
+        </button>
+    </div>
+    <script>
+    function playBriefing() {{
+        const btn = document.getElementById('audio-btn');
+        if ('speechSynthesis' in window) {{
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance("{speech_text}");
+            utterance.rate = 1.0;
+            utterance.pitch = 1.0;
+            utterance.onstart = () => {{ btn.innerText = '⏸️ Playing...'; btn.style.backgroundColor = '#eab308'; }};
+            utterance.onend = () => {{ btn.innerText = '▶️ Replay'; btn.style.backgroundColor = '#22c55e'; }};
+            window.speechSynthesis.speak(utterance);
+        }}
+    }}
+    </script>
+    """
+    st.components.v1.html(audio_html, height=75)
+
     st.markdown("### 🎯 Top 3 Focus Items for Today:")
     for idx, priority in enumerate(briefing.top_3_priorities, 1):
         st.checkbox(f"**Priority {idx}:** {priority}", key=f"priority_{idx}")
+
+    st.markdown("---")
+
+    # 📋 1-Click Auto-Standup Update
+    st.markdown("### 📋 1-Click Auto-Standup Generator (Slack / Discord)")
+    st.caption("Never type a morning standup from memory again. SlothPilot synthesizes yesterday's code, today's schedule, and pending approvals.")
+    standup_text = briefing.generate_standup_report()
+    st.code(standup_text, language="markdown")
+
+    s_col1, s_col2 = st.columns([1, 2])
+    with s_col1:
+        st.download_button(
+            label="📥 Download Standup (.md)",
+            data=standup_text,
+            file_name=f"Standup_{briefing.generated_at[:10]}.md",
+            mime="text/markdown",
+            key="download_standup"
+        )
 
     st.markdown("---")
     # Exportable Digest
@@ -171,10 +218,11 @@ with tab1:
 """ + "\n".join([f"- **{a.title}** ({a.category}) - Status: {a.approval_status}" for a in briefing.actions])
 
     st.download_button(
-        label="📥 Download Morning Briefing (.md)",
+        label="📥 Download Full Executive Briefing (.md)",
         data=digest_text,
         file_name=f"SlothPilot_Morning_Briefing_{briefing.briefing_id}.md",
         mime="text/markdown",
+        key="download_full_briefing"
     )
 
 # ----------------- TAB 2: HUMAN APPROVAL GATE -----------------

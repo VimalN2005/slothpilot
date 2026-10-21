@@ -93,3 +93,26 @@ def test_sqlite_storage_and_approval_gate():
         briefing_id="test_briefing_001", action_id="act_test_01", status="APPROVED"
     )
     assert updated is True
+
+
+def test_standup_and_speech_generation():
+    briefing = MorningBriefing(
+        executive_summary="Everything triaged smoothly.",
+        top_3_priorities=["Fix auth blocker", "Deploy to production"],
+        first_meeting="Sprint Demo (10:30 AM)",
+        sleep_buffer_minutes=120,
+        urgent_chats_detected=1,
+        dirty_repos_detected=0,
+    )
+
+    standup = briefing.generate_standup_report()
+    assert "Morning Standup Update" in standup
+    assert "Fix auth blocker" in standup
+    assert "Sprint Demo (10:30 AM)" in standup
+    assert "Needs approval: 1" in standup
+
+    speech = briefing.generate_audio_speech_text()
+    assert "Good morning!" in speech
+    assert "Sprint Demo (10:30 AM)" in speech
+    assert "120 minutes of extra sleep buffer" in speech
+
