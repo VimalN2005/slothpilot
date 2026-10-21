@@ -76,6 +76,11 @@ flowchart TD
 3. **Safety & Approval Reviewer (`app/agents/reviewer.py`):**
    - Assigns safety ratings (`SAFE`, `REQUIRES_REVIEW`, `DANGEROUS`), enforces the **Human Approval Gate** (no external actions are dispatched automatically), sets the top 3 daily focus items, and calculates the **Sloth Efficiency Score**.
 
+### 👑 Signature Laziness Features:
+- 🛌 **Sloth Sleep Buffer:** Ingests local `.ics` calendar files and calculates how many extra minutes you can sleep before your first morning meeting.
+- 📋 **1-Click Auto-Standup Generator:** Pre-drafts your daily Slack/Discord standup from yesterday's commits, today's schedule, and pending approvals.
+- 🎙️ **45-Second Voice Morning Briefing:** Listen to your morning digest spoken aloud in the browser without even looking at your screen.
+
 ---
 
 ## 🛡️ The Human Approval Gate: Zero Autonomous Disasters
@@ -165,7 +170,7 @@ Open your browser to `http://localhost:8501` to view your briefing, approve draf
 ```bash
 pytest
 ```
-All 12 test suites pass in `< 1.0s` with complete coverage of ingestion parsers (git, notes, chats, todos, calendar), sleep buffer calculation, multi-agent pipeline nodes, and SQLite state persistence.
+All 13 test suites pass in `< 1.0s` with complete coverage of ingestion parsers (git, notes, chats, todos, calendar), standup generation, sleep buffer calculation, multi-agent pipeline nodes, and SQLite state persistence.
 
 ---
 
