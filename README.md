@@ -6,6 +6,7 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Open-Source AI](https://img.shields.io/badge/AI-Open--Weight%20Models-purple)](https://ai.google.dev/gemma)
 [![Hacktoberfest 2026](https://img.shields.io/badge/Hacktoberfest-Week%203%20DEV%20Challenge-orange)](https://dev.to/challenges/hacktoberfest-week3-2026-10-19)
+[![DEV Post](https://img.shields.io/badge/DEV-Article-0a0a0a.svg?logo=devdotto&logoColor=white)](https://dev.to/vimal_sahani_0ccb769da242/slothpilot-the-autonomous-overnight-multi-agent-command-center-because-developers-deserve-8-hours-5b6o)
 
 <p align="center">
   <img src="assets/slothpilot_banner.jpg" alt="SlothPilot Banner" width="100%" />
