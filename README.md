@@ -39,6 +39,7 @@ flowchart TD
         N[Markdown Notes Vault]
         C[WhatsApp & Discord Chat Exports]
         T[Local Todo Lists & Backlogs]
+        K[Calendar & Meetings .ics]
     end
 
     subgraph Agents["Autonomous Multi-Agent Pipeline (app/agents)"]
@@ -129,11 +130,14 @@ python scripts/run_overnight.py
    Go to sleep. SlothPilot is triaging your workspace.
 ============================================================
 
-[1/3] Ingesting local data sources (Git, Notes, Chats, Todos)...
+[1/3] Ingesting local data sources (Git, Notes, Chats, Todos, Calendar)...
       [OK] Scanned 1 Git repository
       [OK] Scanned 1 Markdown notes
       [OK] Scanned 1 Chat exports
       [OK] Scanned 6 Backlog todos
+      [OK] Scanned 2 Calendar events
+      [OK] First Meeting: Sprint Architecture & Payment Webhook Review (10:30 AM)
+      [OK] Sloth Sleep Buffer: +120 mins extra sleep!
 
 [2/3] Running Multi-Agent Pipeline (Aggregator -> Proposer -> Reviewer)...
       [OK] Sloth Efficiency Score: 93%
@@ -141,20 +145,27 @@ python scripts/run_overnight.py
       [OK] Proposed Actions Queued: 5 actions
 
 [3/3] Saving Morning Briefing to SQLite State Store...
-      [OK] Saved briefing: briefing_20261020_155428
+      [OK] Saved briefing: briefing_20261021_162928
 ```
 
-### 3. Wake Up & Launch Your Morning Command Center
+### 3. Automated Overnight Cron Scheduler Daemon (Set & Forget)
+Prefer to never type a command before sleeping? Launch the lightweight scheduler daemon:
+```bash
+python scripts/schedule_overnight.py --hour 3 --minute 0
+```
+SlothPilot will automatically wake up at 03:00 AM every night, ingest your workspace, and stage your morning command center while you sleep.
+
+### 4. Wake Up & Launch Your Morning Command Center
 ```bash
 streamlit run app.py
 ```
 Open your browser to `http://localhost:8501` to view your briefing, approve drafts, and export your markdown daily digest.
 
-### 4. Run Unit Tests
+### 5. Run Unit Tests
 ```bash
 pytest
 ```
-All 8 test suites pass in `< 1.0s` with complete coverage of ingestion parsers, multi-agent pipeline nodes, and SQLite state persistence.
+All 12 test suites pass in `< 1.0s` with complete coverage of ingestion parsers (git, notes, chats, todos, calendar), sleep buffer calculation, multi-agent pipeline nodes, and SQLite state persistence.
 
 ---
 
