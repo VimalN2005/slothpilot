@@ -73,6 +73,7 @@ def ensure_initial_briefing():
             notes_dir=str(sample_data / "notes"),
             chats_dir=str(sample_data / "chats"),
             todos_dir=str(sample_data / "todos"),
+            calendar_dir=str(sample_data / "calendar"),
         )
         briefing = run_slothpilot_pipeline(report)
         save_briefing(briefing)
@@ -96,6 +97,7 @@ with st.sidebar:
                 notes_dir=str(sample_data / "notes"),
                 chats_dir=str(sample_data / "chats"),
                 todos_dir=str(sample_data / "todos"),
+                calendar_dir=str(sample_data / "calendar"),
             )
             new_briefing = run_slothpilot_pipeline(report)
             save_briefing(new_briefing)
@@ -109,6 +111,7 @@ with st.sidebar:
     st.write("📝 Markdown Notes Vault")
     st.write("💬 WhatsApp & Discord Exports")
     st.write("✅ Local Todos & Backlogs")
+    st.write("📅 Local Calendar Exports (.ics)")
     st.markdown("---")
     st.caption("100% Local Inference · $0.00 Token Cost · Hacktoberfest 2026")
 
@@ -122,11 +125,12 @@ st.title("🦥 Good Morning! Here is your Overnight Briefing ☕")
 st.markdown(f"**Briefing Generated:** `{briefing.generated_at}` | **Status:** `Autonomous Triage Complete`")
 
 # Hero Metrics
-c1, c2, c3, c4 = st.columns(4)
-c1.metric("Sloth Efficiency Score", f"{briefing.sloth_efficiency_score}%", delta="Energy Conserved 🦥")
-c2.metric("Manual Triage Saved", f"{briefing.estimated_minutes_saved} mins", delta="No morning stress")
-c3.metric("Urgent Items Flagged", f"{briefing.urgent_chats_detected + briefing.dirty_repos_detected}", delta="Action pre-drafted")
-c4.metric("Inference Cost", "$0.00 USD", delta="100% Local & Free")
+c1, c2, c3, c4, c5 = st.columns(5)
+c1.metric("Sloth Efficiency", f"{briefing.sloth_efficiency_score}%", delta="Energy Conserved 🦥")
+c2.metric("Triage Saved", f"{briefing.estimated_minutes_saved}m", delta="No morning rush")
+c3.metric("Sleep Buffer", f"+{briefing.sleep_buffer_minutes}m", delta="Sleep in safely 🛌")
+c4.metric("Urgent Blockers", f"{briefing.urgent_chats_detected + briefing.dirty_repos_detected}", delta="Pre-drafted")
+c5.metric("Inference Cost", "$0.00", delta="100% Local & Free")
 
 st.markdown("---")
 
@@ -142,6 +146,9 @@ tab1, tab2, tab3, tab4 = st.tabs([
 with tab1:
     st.subheader("Overnight Executive Synthesis")
     st.info(briefing.executive_summary)
+
+    if getattr(briefing, "first_meeting", None):
+        st.success(f"🛌 **Sloth Sleep Buffer Active:** First meeting is **{briefing.first_meeting}**. You have **+{briefing.sleep_buffer_minutes} mins** of extra sleep buffer before prep!")
 
     st.markdown("### 🎯 Top 3 Focus Items for Today:")
     for idx, priority in enumerate(briefing.top_3_priorities, 1):
@@ -213,7 +220,7 @@ with tab3:
     st.subheader("Raw Ingested Local Data Sources")
     st.caption("Inspect the local artifacts scanned while you were sleeping.")
 
-    sub_t1, sub_t2, sub_t3, sub_t4 = st.tabs(["Git Repos", "Chat Exports", "Markdown Notes", "Todos"])
+    sub_t1, sub_t2, sub_t3, sub_t4, sub_t5 = st.tabs(["Git Repos", "Chat Exports", "Markdown Notes", "Todos", "Calendar & Meetings (.ics)"])
 
     with sub_t1:
         st.write(f"**Detected Git Repositories:** {briefing.dirty_repos_detected} dirty")
@@ -221,7 +228,7 @@ with tab3:
             "repo": "slothpilot",
             "branch": "main",
             "is_dirty": False,
-            "recent_commits": ["1a2e103 - feat: implement multi-agent pipeline", "737474e - feat: implement ingestion engine"]
+            "recent_commits": ["a5bc75a - docs: add live Streamlit Cloud demo badge", "938ef28 - feat: configure dark theme"]
         })
 
     with sub_t2:
@@ -241,6 +248,13 @@ with tab3:
         - 🔴 Fix payment webhook retry queue blocker (`!high`)
         - 🔴 Review Dave's contract milestones and send invoice draft (`!high`)
         - ⚪ Clean up dirty git branches on laptop
+        """)
+
+    with sub_t5:
+        st.write(f"**Sleep Buffer Available:** `+{getattr(briefing, 'sleep_buffer_minutes', 120)} mins extra sleep`")
+        st.markdown("""
+        - 📅 **10:30 AM – 11:15 AM:** `Sprint Architecture & Payment Webhook Review` *(High Stakes Demo)*
+        - 📅 **02:00 PM – 02:30 PM:** `Client Dave SOW Contract Alignment Call` *(Advance wire confirmation)*
         """)
 
 # ----------------- TAB 4: OPENTELEMETRY OBSERVABILITY -----------------

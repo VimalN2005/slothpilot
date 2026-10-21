@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SlothPilot//Morning Schedule//EN
+BEGIN:VEVENT
+SUMMARY:Sprint Architecture & Payment Webhook Review
+DTSTART:20261021T103000
+DTEND:20261021T111500
+DESCRIPTION:Review payment queue bug and finalize milestone release with engineering team.
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Client Dave SOW Contract Alignment Call
+DTSTART:20261021T140000
+DTEND:20261021T143000
+DESCRIPTION:Finalize statement of work milestones and advance wire confirmation.
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

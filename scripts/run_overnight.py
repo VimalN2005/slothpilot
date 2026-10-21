@@ -29,17 +29,22 @@ def main() -> None:
 
     sample_data = BASE_DIR / "sample_data"
 
-    safe_print("\n[1/3] Ingesting local data sources (Git, Notes, Chats, Todos)...")
+    safe_print("\n[1/3] Ingesting local data sources (Git, Notes, Chats, Todos, Calendar)...")
     report = run_overnight_ingestion(
         git_paths=[str(BASE_DIR)],
         notes_dir=str(sample_data / "notes"),
         chats_dir=str(sample_data / "chats"),
         todos_dir=str(sample_data / "todos"),
+        calendar_dir=str(sample_data / "calendar"),
     )
     safe_print(f"      [OK] Scanned {len(report.git_repos)} Git repository")
     safe_print(f"      [OK] Scanned {len(report.notes)} Markdown notes")
     safe_print(f"      [OK] Scanned {len(report.chats)} Chat exports")
     safe_print(f"      [OK] Scanned {len(report.todos)} Backlog todos")
+    safe_print(f"      [OK] Scanned {len(report.calendar_events)} Calendar events")
+    if report.first_meeting_time:
+        safe_print(f"      [OK] First Meeting: {report.first_meeting_time}")
+        safe_print(f"      [OK] Sloth Sleep Buffer: +{report.sleep_buffer_minutes} mins extra sleep!")
 
     safe_print("\n[2/3] Running Multi-Agent Pipeline (Aggregator -> Proposer -> Reviewer)...")
     briefing = run_slothpilot_pipeline(report)

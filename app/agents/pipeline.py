@@ -39,6 +39,8 @@ def run_slothpilot_pipeline(report: IngestionReport) -> MorningBriefing:
             dirty_repos_detected=len(context.get("dirty_repos", [])),
             urgent_chats_detected=len(context.get("urgent_chats", [])),
             high_priority_todos=len(context.get("high_priority_todos", [])),
+            first_meeting=report.first_meeting_time,
+            sleep_buffer_minutes=report.sleep_buffer_minutes,
             top_3_priorities=priorities,
             actions=actions,
         )

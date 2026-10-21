@@ -36,5 +36,7 @@ class MorningBriefing(BaseModel):
     dirty_repos_detected: int = 0
     urgent_chats_detected: int = 0
     high_priority_todos: int = 0
+    first_meeting: Optional[str] = None
+    sleep_buffer_minutes: int = 0
     top_3_priorities: List[str] = Field(default_factory=list)
     actions: List[ProposedAction] = Field(default_factory=list)

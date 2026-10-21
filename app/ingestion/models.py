@@ -55,6 +55,16 @@ class TodoItem(BaseModel):
     source_file: str = ""
 
 
+class CalendarEvent(BaseModel):
+    """Snapshot of an upcoming meeting or schedule item from .ics or calendar file."""
+    summary: str
+    start_time: str
+    end_time: str
+    is_urgent: bool = False
+    attendees: List[str] = Field(default_factory=list)
+    description: str = ""
+
+
 class IngestionReport(BaseModel):
     """Aggregated local system snapshot created overnight."""
     scanned_at: str = Field(default_factory=lambda: datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
@@ -62,3 +72,6 @@ class IngestionReport(BaseModel):
     notes: List[NoteItem] = Field(default_factory=list)
     chats: List[ChatDigest] = Field(default_factory=list)
     todos: List[TodoItem] = Field(default_factory=list)
+    calendar_events: List[CalendarEvent] = Field(default_factory=list)
+    sleep_buffer_minutes: int = 0
+    first_meeting_time: Optional[str] = None
