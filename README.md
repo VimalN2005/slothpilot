@@ -86,6 +86,10 @@ flowchart TD
 
 ## 🛡️ The Human Approval Gate: Zero Autonomous Disasters
 
+<p align="center">
+  <img src="assets/approval_gate.png" alt="SlothPilot Human Approval Gate" width="100%" />
+</p>
+
 SlothPilot strictly adheres to the principle of safe human-in-the-loop AI:
 - **No unapproved side-effects:** SlothPilot *never* automatically sends an email, commits to git, or messages a client without human intervention.
 - Every pre-drafted action is staged in the **Human Approval Gate** with full transparency (reasoning, safety level, proposed payload).
@@ -107,6 +111,10 @@ SlothPilot includes zero-dependency OpenTelemetry tracing (`app/core/telemetry.p
 ### 🌐 Instant Live Cloud Demo
 Try the interactive Morning Command Center directly in your browser without any setup:
 👉 **[Launch SlothPilot Live Demo](https://slothpilot-xaqtgwwbpv2tfvscjhxakr.streamlit.app/)**
+
+<p align="center">
+  <img src="assets/dashboard_overview.png" alt="SlothPilot Dashboard Overview" width="100%" />
+</p>
 
 ---
 
